@@ -113,7 +113,7 @@ func GetIndexUrl(index string, _type string, id string, parentId string, version
 	// A document can be indexed with a ttl (time to live) associated with it. Expired documents
 	// will be expunged automatically.
 	if ttl > 0 {
-		values.Add("ttl", strconv.Itoa(ttl))
+		values.Add("ttl", strconv.Itoa(ttl)+"s")
 	}
 	if len(percolate) > 0 {
 		values.Add("percolate", percolate)
