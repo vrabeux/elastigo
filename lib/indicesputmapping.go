@@ -16,6 +16,7 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"log"
 )
 
 type Mapping map[string]MappingOptions
@@ -101,9 +102,11 @@ func (c *Conn) PutMapping(index string, typeName string, instance interface{}, o
 	}
 	getProperties(instanceType, opt.Properties)
 	body, err := json.Marshal(MappingForType(typeName, opt))
+	log.Println(string(body))
 	if err != nil {
 		return err
 	}
+	log.Println(fmt.Sprintf("/%s/%s/_mapping", index, typeName))
 	_, err = c.DoCommand("PUT", fmt.Sprintf("/%s/%s/_mapping", index, typeName), nil, string(body))
 	if err != nil {
 		return err
